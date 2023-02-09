@@ -16,14 +16,13 @@ const productosController =  {
         /*
         let products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
         res.render('./products/productList.ejs', {products, longitud: products.length});
-        */
-          
+        */ 
+         
         db.Curso.findAll()
-        .then(curso => {
-            return res.render('../views/products/productList.ejs', {curso, longitud: curso.length})
+        .then(products => {
+            return res.render('../views/products/productList.ejs', {products, longitud: products.length})
         })
-        .catch(error => res.send(error));
-        
+        .catch(error => res.send(error))
     },
 
     //formulario de creación
@@ -35,6 +34,7 @@ const productosController =  {
 
     //detalle de un producto
     productDetail: (req, res) => {
+        /*
         let products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
         let product = products.filter(p => p.id==req.params.id)
 
@@ -46,6 +46,13 @@ const productosController =  {
             price: product[0].price,
             image: product[0].image,
         })
+        */
+
+        db.Curso.findByPk(req.params.id)
+            .then(function(curso){
+
+                res.render('./products/productDetail.ejs',{curso:curso});
+            })
 
     },
 

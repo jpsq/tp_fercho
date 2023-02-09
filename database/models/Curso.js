@@ -12,7 +12,7 @@ module.exports = (sequelize, dataTypes) => {
             allowNull: false,
             type: dataTypes.STRING
         },
-        desription: {
+        parrafo: {
             allowNull: false,
             type: dataTypes.STRING
         },
