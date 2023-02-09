@@ -14,10 +14,13 @@ const productosController =  {
     //listado   
     productList: (req, res) => {
 
-        /*
+        let products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+        res.render('./products/productList.ejs', {products, longitud: products.length});
+
+        /*   
         db.Curso.findAll()
         .then(curso => {
-            return res.render('../views/products/productList.ejs', {curso})
+            return res.render(__dirname,'../views/products/productList.ejs', {curso})
         })
         .catch(error => res.send(error));
         */

@@ -24,3 +24,15 @@ app.use('/user',userRoutes);
 app.use('/products',productsRoutes);
 
 app.listen(process.env.PORT || 3050, () => console.log('Servidor activo-3050'));
+
+
+var database = require('./database/models');
+database.sequelize
+  .authenticate()
+  .then(function(err) {
+    console.log('Connection has been established successfully.');
+  }, function (err) {
+    console.log('Unable to connect to the database:', err);
+  });
+
+
