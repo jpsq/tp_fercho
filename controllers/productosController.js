@@ -29,7 +29,6 @@ const productosController =  {
     createProducts: (req, res) => {
         
         res.render('../views/products/create');
-
     },
 
     //detalle de un producto
@@ -83,17 +82,35 @@ const productosController =  {
 
     //acción de creación (post)
     createNewProduct: (req, res) => {
+
+        /*
         let products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
         let newProduct = {
             id: products[products.length-1].id+1,
             ...req.body,
             image: req.file ? req.file.filename : products.image,
             number: products[products.length-1].id < 9 ? "0" + (products[products.length-1].id+1).toString() : (products[products.length-1].id+1).toString()
-    };
-    products.push(newProduct)
-    fs.writeFileSync(productsFilePath, JSON.stringify(products, null, " "));
+        };
+        products.push(newProduct)
+        fs.writeFileSync(productsFilePath, JSON.stringify(products, null, " "));
             res.redirect('/products/'+ newProduct.id);
-        },
+        */
+
+        const _body = { 
+            //return res.send(_body);
+            title : req.body.title,
+            parrafo: req.body.parrafo,
+            price: req.body.price,
+            image : req.file.filename,
+            number : req.body.number,
+        }    
+        //return res.send(_body);
+        db.Curso.create(_body)
+        .then(curso =>{
+            res.redirect('/products');
+        })
+        .catch(error => res.send(error))
+    },
     
     //acción de edición (put)
     editProduct: (req, res) => {
