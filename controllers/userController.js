@@ -56,10 +56,11 @@ const userController = {
         res.render('./users/login')
     },
     
-    inscripcion: (req, res) => res.render('./users/inscripcion'),
+    inscripcion: (req, res) => res.render('./users/inscripcion.ejs'),
 
     //PROCESO DE REGISTRO (POST)
     registerProcess: (req, res) => {
+       /*
         let users = JSON.parse(fs.readFileSync(userFilePath, 'utf-8'));
         console.log(req.body.password);
         console.log(req.body);
@@ -73,8 +74,22 @@ const userController = {
             users.push(newUser);
             fs.writeFileSync(userFilePath, JSON.stringify(users, null, " "));
             res.redirect('/user/detail/'+ newUser.id);
-        },
-    
+        */
+
+        const _body = { 
+            name : req.body.name,
+            surname : req.body.surname,
+            email : req.body.email,
+            image : req.file.filename,
+            password : bcrypt.hashSync(req.body.password, 10),
+        }    
+        db.Usuario.create(_body)
+        .then(usuario =>{
+            res.redirect('/user/');
+        })
+        .catch(error => res.send(error))
+    },
+        
     //PROCESO DE LOGIN (POST)
     loginProcess: (req, res) => {
         
