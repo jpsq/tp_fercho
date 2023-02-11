@@ -79,7 +79,6 @@ const productosController =  {
 
             res.render('./products/edit.ejs',{curso});
         })
-
     },
 
     //acción de creación (post)
@@ -134,17 +133,30 @@ const productosController =  {
          
     //acción de borrado (delete)
     deleteProduct: (req, res) => {
+
+        /*
         let products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
         let productId = req.params.id;
         //trae todos los registros distintos al productId
         let finalProducts = products.filter((product) => product.id != productId);
         let productsToSave = JSON.stringify(finalProducts, null, 2);
         fs.writeFileSync(path.resolve(__dirname, '../data/productos.json'), productsToSave);
-    res.redirect('/products/');
+        res.redirect('/products/');
+        */
+
+        db.Curso.destroy({
+            where: {
+                id : req.params.id
+            }
+        })
+        .then(()=>  res.redirect('/products'))
+        .catch(error => res.send(error))
     },
 
     //formulario del delete
     deleteProducts: (req, res) => {
+
+        /*
         let products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
         let product = products.filter(p => p.id==req.params.id)
         //console.log(product);
@@ -156,6 +168,14 @@ const productosController =  {
             parrafo: product[0].parrafo,
             price: product[0].price,
         })
+        */
+
+        db.Curso.findByPk(req.params.id)
+        .then(function(curso){
+
+            res.render('./products/delete.ejs',{curso});
+        })
+
     }
 }
 

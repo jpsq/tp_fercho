@@ -24,19 +24,19 @@
 
       <!-- FORMULARIO DEL DELETE -->
 
-      <form action="/products/<%= id %>?_method=DELETE" method="POST">
+      <form action="/products/<%= curso.id %>?_method=DELETE" method="POST">
  
         <label>Nombre del curso:</label>
-        <input type="text" name="title" value="<%= title %>"> 
+        <input type="text" name="title" value="<%= curso.title %>"> 
 
         <label>Descripcion:</label>
-        <input type="text" name="parrafo" value="<%= parrafo %>">
+        <input type="text" name="parrafo" value="<%= curso.parrafo %>">
         
         <label>Imagen:</label>
         <input type="file" name="image">
 
         <label>Precio:</label>
-        <input type="text" name="price" value="<%= price %>">
+        <input type="text" name="price" value="<%= curso.price %>">
 
         <button type="submit">Borrar</button>
           
