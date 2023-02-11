@@ -55,9 +55,10 @@ const productosController =  {
             })
 
     },
-
+    
     //formulario de edición
     editProducts: (req, res) => {
+        /*
         let products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
         let product = products.filter(p => p.id==req.params.id)
         //console.log(product);
@@ -69,8 +70,16 @@ const productosController =  {
             parrafo: product[0].parrafo,
             price: product[0].price,
             image: product[0].image,
-
         })
+        
+        */
+
+        db.Curso.findByPk(req.params.id)
+        .then(function(curso){
+
+            res.render('./products/edit.ejs',{curso});
+        })
+
     },
 
     //acción de creación (post)
@@ -89,6 +98,7 @@ const productosController =  {
     
     //acción de edición (put)
     editProduct: (req, res) => {
+        /*
         let products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
         req.body.id = Number(req.params.id);
 
@@ -105,6 +115,21 @@ const productosController =  {
         let updatedProduct = JSON.stringify(newProducts, null, 2);
         fs.writeFileSync(path.resolve(__dirname, '../data/productos.json'), updatedProduct);
         res.redirect('/products/');
+        */
+
+        db.Curso.update ({
+            title: req.body.title,
+            price: req.body.price,
+            parrafo: req.body.parrafo,
+            image: req.file ? req.file.filename : product.image,
+            //categoryId : req.body.categoria
+        }, {
+            where: {  
+                id: req.params.id
+           }
+        })
+        .then(()=> res.redirect('/products'))
+        .catch(error =>res.send(error))
     },
          
     //acción de borrado (delete)

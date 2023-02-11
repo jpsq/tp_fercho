@@ -25,19 +25,19 @@
 
       <!-- FORMULARIO DEL EDIT -->
 
-      <form action="/products/<%= id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+      <form action="/products/<%= curso.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
  
         <label>Nombre del curso:</label>
-        <input type="text" name="title" value="<%= title %>" required> 
+        <input type="text" name="title" value="<%= curso.title %>" required> 
 
         <label>Descripcion:</label>
-        <input type="text" name="parrafo" value="<%= parrafo %>" required>
+        <input type="text" name="parrafo" value="<%= curso.parrafo %>" required>
         
         <label>Imagen:</label>
         <input type="file" name="image">
 
         <label>Precio:</label>
-        <input type="text" name="price" value="<%= price %>" required>
+        <input type="text" name="price" value="<%= curso.price %>" required>
 
         <button type="submit">Editar</button>
           
