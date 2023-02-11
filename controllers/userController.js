@@ -29,7 +29,7 @@ const userController = {
     },
     //USER DETAIL
     detail: (req, res) => {
-
+        /*
         let users = JSON.parse(fs.readFileSync(userFilePath, 'utf-8'));
         let user = users.filter(p => p.id == req.params.id);
         //console.log(user);
@@ -41,6 +41,14 @@ const userController = {
             password: user[0].password,
             image: user[0].image,
         })
+        */
+
+        db.Usuario.findByPk(req.params.id)
+        .then(function(usuarios){
+            res.render('./users/detail.ejs',{usuarios});
+        })
+
+
     },
 
     //LOGIN FORM
