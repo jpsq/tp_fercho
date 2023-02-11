@@ -46,13 +46,12 @@ const productosController =  {
             image: product[0].image,
         })
         */
-
+       
         db.Curso.findByPk(req.params.id)
             .then(function(curso){
 
                 res.render('./products/productDetail.ejs',{curso:curso});
             })
-
     },
     
     //formulario de edición

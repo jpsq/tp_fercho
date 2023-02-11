@@ -4,15 +4,23 @@ const fs = require('fs');
 
 const bcrypt = require('bcryptjs');
 
-const userFilePath = path.resolve(__dirname, '../data/usuarios.json');
+//const userFilePath = path.resolve(__dirname, '../data/usuarios.json');
+const db = require ('../database/models');
 
 const userController = {
 
     //USERS LIST
     list: (req, res) => {
-            
-            let users = JSON.parse(fs.readFileSync(userFilePath, 'utf-8'));
-            res.render('./users/userList.ejs', {users, longitud: users.length});
+        /*
+        let users = JSON.parse(fs.readFileSync(userFilePath, 'utf-8'));
+        res.render('./users/userList.ejs', {users, longitud: users.length});
+        */
+
+        db.Usuario.findAll()
+        .then(usuarios => {
+            return res.render('../views/users/userList.ejs', {usuarios, longitud: usuarios.length})
+        })
+        .catch(error => res.send(error))
     },
     
     //REGISTER FORM
