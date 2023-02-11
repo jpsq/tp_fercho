@@ -95,4 +95,4 @@ SPRINT 5
     2. Retro starfish sprint 5:  https://github.com/Yhomed/gestion-de-proyectos_G12/blob/main/RETRO.md
 
     3. Registro weeklys: https://github.com/Yhomed/gestion-de-proyectos_G12/blob/main/Weekly.md
-    
+    # tp_fercho
