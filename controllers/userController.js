@@ -93,6 +93,7 @@ const userController = {
     //PROCESO DE LOGIN (POST)
     loginProcess: (req, res) => {
         
+        /*
         let users = JSON.parse(fs.readFileSync(userFilePath, 'utf-8'));
         let email = req.body.email
         let password = req.body.password
@@ -117,6 +118,7 @@ const userController = {
         } else {
             res.redirect("/user/login");
         }
+        */
     
     },
 
