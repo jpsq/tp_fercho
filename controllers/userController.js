@@ -66,34 +66,6 @@ const userController = {
     //PROCESO DE LOGIN (POST)
     loginProcess: (req, res) => {
         
-        /*
-        let users = JSON.parse(fs.readFileSync(userFilePath, 'utf-8'));
-        let email = req.body.email
-        let password = req.body.password
-        
-        let userToLogin = users.find(user => {
-            return user.email == email;
-        })
-        console.log(email);
-        console.log(userToLogin);
-        console.log(bcrypt.compareSync(password, userToLogin.password))
-
-        let passwordIsCorrect = false;
-        if(userToLogin) { 
-            passwordIsCorrect = bcrypt.compareSync(password, userToLogin.password);
-        } else {
-            res.redirect("/user/login");
-        }
-
-        if(passwordIsCorrect){
-            req.session.userLog = userToLogin;
-            return res.redirect("/user/profile/"+userToLogin.id);
-        } else {
-            res.redirect("/user/login");
-        }
-        */
-
-        //inicia codigo para logueo sobre la base de datos
         db.Usuario.findAll()
         .then((users) => {		
             //Aquí guardo los errores que vienen desde la ruta, valiendome del validationResult
