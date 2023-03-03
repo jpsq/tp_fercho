@@ -7,7 +7,7 @@ const {
     check,
     validationResult,
     body
-} = require('../node_modules/express-validator');
+} = require('express-validator');
 
 //const userFilePath = path.resolve(__dirname, '../data/usuarios.json');
 const db = require ('../database/models');
@@ -25,9 +25,10 @@ const userController = {
     },
     
     //REGISTER FORM
-    register: (req, res) =>{
+    register: (req, res) => {
         res.render('./users/register')
     },
+
     //USER DETAIL
     detail: (req, res) => {
 
@@ -48,6 +49,12 @@ const userController = {
     //PROCESO DE REGISTRO (POST)
     registerProcess: (req, res) => {
 
+        let errors = validationResult(req);
+        if(!errors.isEmpty()) {
+        return res.render(path.resolve(__dirname, '../views/users/register'), {
+          errors: errors.errors,  old: req.body
+        });
+      } 
         const _body = { 
             name : req.body.name,
             surname : req.body.surname,
@@ -65,39 +72,48 @@ const userController = {
     //PROCESO DE LOGIN (POST)
     loginProcess: (req, res) => {
         
-        db.Usuario.findAll()
-        .then((users) => {		
-            //Aquí guardo los errores que vienen desde la ruta, valiendome del validationResult
-            let errors = validationResult(req);
-            
-            let usuarioLogueado = []; //variable que aloja el usuario q se intento loguear
-            
-            if(req.body.email != '' && req.body.password != ''){ //si la pass e email no son vacios
-            usuarioLogueado = users.filter(function (user) {     //filtra y guarda
-                return user.email === req.body.email  
-            });
-            //Aquí verifico si la clave que está colocando es la misma que está hasheada en la Base de datos - El compareSync retorna un true ó un false
-            if(bcrypt.compareSync(req.body.password,usuarioLogueado[0].password) === false){
-                usuarioLogueado = []; //si no es la clave correcta deja en nulo la variable del usuario
-            }
+        const resultValidation = validationResult(req);
+        
+        if(resultValidation.errors.length > 0){
+            return res.render('login', {
+                errors: resultValidation.mapped(),
+                oldData: req.body,
+            })
+        }
 
+        let userToLogin = Usuario.findOne({
+            where: {
+                email: req.body.email,
             }
-
-            //Aquí determino si el usuario fue encontrado ó no en la Base de Datos
-            if (usuarioLogueado.length === 0) {
-                return res.render(path.resolve(__dirname, '../views/users/login'),{ errors: [{ msg: "Credenciales invalidas" }] });
-            } else {
-            //Aquí guardo en SESSION al usuario logueado
-            req.session.usuario = usuarioLogueado[0];
-            }
-            //Aquí verifico si el usuario le dio click en el check box para recordar al usuario 
-            if(req.body.recordarme){
-            res.cookie('email',usuarioLogueado[0].email,{maxAge: 1000 * 60 * 60 * 24})
-            }
-            return res.redirect('/');   //Aquí ustedes mandan al usuario para donde quieran (Perfil- home)
-
         })
-    
+
+        .then((user) => {
+            if(user){
+                let isOkThePassword = bcryptjs.compareSync(
+                    req.body.password,
+                    user.password
+                )
+            
+                if(isOkThePassword){
+                    req.session.userLogged = user;
+
+                    if(req.body.recordarme){
+                        res.cookies('userEmail', req.body.email, {
+                        maxAge: 1000 * 60 * 60,
+                    })}
+                return res.redirect('/user/profile')
+                }
+            }
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    },
+
+    logOut: (req, res) => {
+        res.clearCookie('Email del usuario');
+        req.session.destroy();
+        return res.redirect('/');
     },
 
     profile: (req, res) => {
@@ -128,7 +144,6 @@ const userController = {
             email: user[0].email,
             password: user[0].password,
             image: user[0].image,
-
         })
         */
 
@@ -148,7 +163,6 @@ const userController = {
         /*
         let users = JSON.parse(fs.readFileSync(userFilePath, 'utf-8'));
         req.body.id = Number(req.params.id);
-
         let newUsers = users.map((user) => {
             if (user.id == req.body.id) {
                 let temp = req.body;
@@ -211,8 +225,46 @@ const userController = {
 
             res.render('./users/delete.ejs',{usuario});
         })
-    }
+    },
 
-};
+    
+/*
+    // json
+    list: (req, res) => {
+        db.Usuario.findAll()
+      
+       // DB.Usuarios 
+        //.findAll()
+        .then(usuarios =>{
+       return res.status(200).json({
+        //total: usuarios.length,
+        data: usuarios,
+        status: 200,
+        
+     });
+   })
+   .catch(err => { console.log('Errores al buscar el usuario: ' + err)}) 
+},
 
-module.exports = userController; 
+
+
+show: (req, res) => {
+    db.Usuario.findByPk(req. params.id)
+  
+    .then(user =>{
+   return res.status(200).json({
+   // total: usuarios.length,
+    data: user,
+    status: 200,
+    
+ });
+})
+.catch(err => { console.log('Errores al buscar el usuario: ' + err)}) 
+}, */
+} 
+
+
+module.exports = userController;
+
+
+

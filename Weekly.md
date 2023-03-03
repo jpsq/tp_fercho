@@ -156,24 +156,95 @@ REGISTRO DE WEEKLY
     - Fecha de entrega 6to Sprint: Martes 2023/02/10
     - Entregables:
         1. Archivo retro.md con el resultado de la retrospectiva.                           LISTO
-        2. (Opcional) Archivo daily.md con sus opiniones sobre las dailys/weeklys.          PENDIENTE
-        3. Tablero de trabajo actualizado.                                                  PENDIENTE
-        4. Diagrama de base de datos.                                                       PENDIENTE
-        5. Script de creación de estructura de base de datos con:                           PENDIENTE
+        2. (Opcional) Archivo daily.md con sus opiniones sobre las dailys/weeklys.          LISTO
+        3. Tablero de trabajo actualizado.                                                  LISTO
+        4. Diagrama de base de datos.                                                       LISTO
+        5. Script de creación de estructura de base de datos con:                           LISTO
             a. Creación de la base de datos y de todas sus tablas.
             b. Tipos de datos de los campos y sus restricciones.
             c. Relaciones entre las diferentes tablas.
-        6. (Opcional) Script de datos de base de datos para:                                PENDIENTE
+        6. (Opcional) Script de datos de base de datos para:                                LISTO
             a. Tabla de usuarios.
             b. Tabla de productos.
             c. Tablas secundarias (categorías, marcas, colores, talles, etc).
             d. (Opcional) Tabla de carrito de compras y productos de carritos de compras.
-        7. Creación de carpeta Sequelize con:                                               PENDIENTE
+        7. Creación de carpeta Sequelize con:                                               LISTO
             a. Archivos de configuración.
             b. Modelos con sus relaciones.
-        8. CRUD:                                                                            PENDIENTE
+        8. CRUD:                                                                            LISTO
             a. De productos.
             b. De usuarios.
             c. (Opcional) De tablas secundarias.
 
-
+5. 2023/2/16 REGISTRO WEEKLY:
+    - Vamos en el 7mo Sprint.
+    - Fecha de entrega 6to Sprint: Jueves 2023/02/16
+    - Entregables:
+        1. Archivo retro.md con el resultado de la retrospectiva.                          LISTO
+        2. (Opcional) Archivo daily.md con sus opiniones sobre las dailys/weeklys          LISTO 
+        3. Tablero de trabajo actualizado.                                                 LISTO
+        4. Validaciones del back-end con Express Validator:                                EN PROCESO 
+            I. Registro de usuarios.
+                Nombre y apellido
+                    ■ Obligatorio.
+                    ■ Deberá tener al menos 2 caracteres.
+                Email
+                    ■ Obligatorio.
+                    ■ Deberá ser un formato de e-mail válido.
+                    ■ No puede repetirse con los e-mails ya registrados.
+                Contraseña
+                    ■ Obligatoria.
+                    ■ Deberá tener al menos 8 caracteres.
+                    ■ (Opcional) → Deberá tener letras mayúsculas, minúsculas, un número y un carácter especial.
+                Imagen
+                    ■ Deberá ser un archivo válido (JPG, JPEG, PNG, GIF).
+            II. Login de usuarios.
+                Email
+                    ■ Obligatorio.
+                    ■ Deberá ser válido.
+                    ■ Deberá existir en base.
+                Contraseña
+                    ■ Obligatoria.
+                    ■ Deberá coincidir con la existente en base.
+            III. Creación y modificación de productos.
+                Nombre
+                    ■ Obligatorio.
+                    ■ Deberá tener al menos 5 caracteres.
+                Descripción
+                    ■ Deberá tener al menos 20 caracteres.
+                Imagen
+                    ■ Deberá ser un archivo válido (JPG, JPEG, PNG, GIF).
+                (Opcional) Tablas secundarias
+                    ■ Verificar que los valores existan en base. Es decir, que los valores de talles, colores, etc. que lleguen sean válidos en la base.
+            IV. (Opcional) Resto de los formularios del sitio.
+        5. Validaciones del front-end con JavaScript:                 EN PROCESO 
+            I. Registro de usuarios.
+                Nombre y apellido
+                    ■ Obligatorio.
+                    ■ Deberá tener al menos 2 caracteres.
+                Email
+                    ■ Obligatorio.
+                    ■ Deberá ser válido.
+                    ■ (Opcional) → No puede repetirse con los e-mails ya registrados.
+                Contraseña
+                    ■ Obligatoria.
+                    ■ Deberá tener al menos 8 caracteres.
+                    ■ (Opcional) → Deberá tener letras mayúsculas, minúsculas, un número y un carácter especial.
+                Imagen
+                    ■ Deberá ser un archivo válido (JPG, JPEG, PNG, GIF).
+            II. Login de usuarios.
+                Email
+                    ■ Obligatorio.
+                    ■ Deberá ser válido.
+                    ■ (Opcional) → Debe existir en la base.
+                Contraseña
+                    ■ Obligatoria.
+            III. Creación y modificación de productos.
+                Nombre
+                    ■ Obligatorio.
+                    ■ Deberá tener al menos 5 caracteres.
+                Descripción
+                    ■ Deberá tener al menos 20 caracteres.
+                Imagen
+                    ■ Deberá ser un archivo válido (JPG, JPEG, PNG, GIF
+            IV. (Opcional) Resto de los formularios del sitio.

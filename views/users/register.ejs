@@ -24,7 +24,7 @@
     <main>
 
         <!-- FORMULARIO DE REGISTRO -->
-        <form action="/user/" method="POST" enctype="multipart/form-data">
+        <form action="/user/" method="POST" enctype="multipart/form-data" class="form">
             <!-- <form action="/" method="GET"> -->
 
             <h2>Crea tu cuenta</h2>
@@ -64,6 +64,16 @@
                 <span class="feedback"></span> 
             </div>
 
+            <div>
+                <ul id="errores" class="text-danger">
+            <% if(typeof(errors) != 'undefined'){%>
+                   <% errors.forEach(error => { %>
+                      <li><%= error.msg%></li>
+                   <%});%>
+             <%}%>
+                </ul>
+            </div> 
+
             <!--  CONFIRMAR CONTRASEÑA
             <div>
                 <label class="password">Confirmar Contraseña: </label>
@@ -72,7 +82,7 @@
             </div> -->
             
             <!-- BOTON BORRAR -->
-            <button type="reset">Borrar</button>
+            <!--<button type="reset">Borrar</button>-->
 
             <!-- BOTON ENVIAR -->
             <button type="submit">Enviar</button>
@@ -88,6 +98,7 @@
         <%- include('../partials/footer.ejs') %>     
    
     </footer>
+    <script src="/js/register.js"> </script>
 </body>
 </html>
 
