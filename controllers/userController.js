@@ -242,9 +242,6 @@ const userController = {
    })
    .catch(err => { console.log('Errores al buscar el usuario: ' + err)}) 
 },
-
-
-
 show: (req, res) => {
     db.Usuario.findByPk(req. params.id)
   
@@ -262,6 +259,3 @@ show: (req, res) => {
 
 
 module.exports = userController;
-
-
-
